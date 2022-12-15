@@ -1,0 +1,61 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: pre-run-
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+        - name: pre-run
+          image: alpine:latest
+          command: ["sleep", "10"]
+  backoffLimit: 0
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: main
+  annotations:
+    argocd.argoproj.io/hook: Sync
+spec:
+  template:
+    spec:
+      containers:
+        - name: main
+          image: alpine:latest
+          command: ["sleep", "20"]
+  backoffLimit: 0
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: post-run-
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook-delete-policy: HookFailed
+spec:
+  template:
+    spec:
+      containers:
+        - name: post
+          image: alpine:latest
+          command: ["sleep", "20"]
+  backoffLimit: 0      
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: skip-
+  annotations:
+    argocd.argoproj.io/hook: Skip
+spec:
+  template:
+    spec:
+      containers:
+        - name: skip
+          image: alpine:latest
+          command: ["sleep", "10"]
+  backoffLimit: 0

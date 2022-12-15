@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook-p-shared-2
+  namespace: argocd
+spec:
+  project: demo-project
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: guestbook-p
+  source:
+    path: guestbook
+    repoURL: https://github.com/Samba73/argocd-example-apps.git
+    targetRevision: master
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - FailOnSharedResource=true

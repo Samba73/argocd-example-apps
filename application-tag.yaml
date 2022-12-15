@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook-tag
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: guestbook-tag
+  source:
+    path: guestbook
+    repoURL: https://github.com/Samba73/argocd-example-apps.git
+    targetRevision: v2
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

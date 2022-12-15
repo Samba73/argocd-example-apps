@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook-cluster
+  namespace: argocd
+spec:
+  destination:
+    server: https://192.168.64.8:8443
+    namespace: guestbook
+  project: default
+  source:
+    path: guestbook
+    repoURL: https://github.com/Samba73/argocd-example-apps.git
+    targetRevision: master
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
