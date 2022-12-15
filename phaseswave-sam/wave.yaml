@@ -62,7 +62,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: maintPage-up-
+  name: maintpage-up-
   annotations:
      argocd.argoproj.io/hook: Sync
      argocd.argoproj.io/sync-wave: "1"
@@ -71,7 +71,7 @@ spec:
   template:
     spec:
       containers:
-      - name: maintPage-up
+      - name: maintpage-up
         image: alpine
         command: ["sleep",  "10"]
       restartPolicy: Never
@@ -112,7 +112,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: maintPage-down-
+  generateName: maintpage-down-
   annotations:
      argocd.argoproj.io/hook: Sync
      argocd.argoproj.io/sync-wave: "3"
@@ -121,7 +121,7 @@ spec:
   template:
     spec:
       containers:
-      - name: maintPage-down
+      - name: maintpage-down
         image: alpine
         command: ["sleep",  "10"]
       restartPolicy: Never
