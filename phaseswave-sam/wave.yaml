@@ -9,10 +9,10 @@ spec:
   template:
     spec:
        containers:
-         - name: pre
-           image: alpine
-           command: ["sleep", "10"] 
-         restartPolicy: Never  
+       - name: pre
+         image: alpine
+         command: ["sleep", "10"] 
+       restartPolicy: Never  
 ---
 apiVersion: batch/v1
 kind: Job
@@ -25,9 +25,10 @@ spec:
   template:
     spec:
        containers:
-         - name: pre
-           image: alpine
-           command: ["sleep", "10"]
+       - name: pre
+         image: alpine
+         command: ["sleep", "10"]
+       restartPolicy: Never    
 ---
 apiVersion: apps/v1
 kind: Deployment
