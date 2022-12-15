@@ -45,8 +45,7 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: alpine
-        command: ["sleep", "10"]
+        image: nginx
 ---
 apiVersion: v1
 kind: Service
@@ -93,8 +92,7 @@ spec:
     spec:
       containers:
       - name: myapp
-        image: alpine
-        command: ["sleep", "10"]
+        image: nginx
 ---
 apiVersion: v1
 kind: Service
