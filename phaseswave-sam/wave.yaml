@@ -4,7 +4,7 @@ metadata:
    generateName: pre-1-
    annotations:
      argocd.argoproj.io/hook: PreSync
-     argocd.argoproj.io/sync-wave: 0
+     argocd.argoproj.io/sync-wave: "0"
 spec:
   template:
     spec:
@@ -19,7 +19,7 @@ metadata:
    generateName: pre-2-
    annotations:
      argocd.argoproj.io/hook: PreSync
-     argocd.argoproj.io/sync-wave: 1
+     argocd.argoproj.io/sync-wave: "1"
 spec:
   template:
     spec:
@@ -63,7 +63,7 @@ metadata:
   name: maintPage-up-
   annotations:
      argocd.argoproj.io/hook: Sync
-     argocd.argoproj.io/sync-wave: 1
+     argocd.argoproj.io/sync-wave: "1"
      argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
 spec:
   template:
@@ -79,7 +79,7 @@ kind: Deployment
 metadata:
   generateName: deploy-frontend-
   annotations:
-    argocd.argoproj.io/sync-wave: 2
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   selector:
     matchLabels:
@@ -99,7 +99,7 @@ kind: Service
 metadata:
   name: service-frontend-
   annotations:
-    argocd.argoproj.io/sync-wave: 2
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   selector:
     app: myapp
@@ -113,7 +113,7 @@ metadata:
   name: maintPage-down-
   annotations:
      argocd.argoproj.io/hook: Sync
-     argocd.argoproj.io/sync-wave: 3
+     argocd.argoproj.io/sync-wave: "3"
      argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
 spec:
   template:
