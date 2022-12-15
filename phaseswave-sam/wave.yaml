@@ -1,0 +1,130 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+   generateName: pre-1-
+   annotations:
+     argocd.argoproj.io/hook: PreSync
+     argocd.argoproj.io/sync-wave: 0
+spec:
+  template:
+    spec:
+       containers:
+         - name: pre
+           image: alpine
+           command: ["sleep", "10"]
+        restartPolicy: Never   
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+   generateName: pre-2-
+   annotations:
+     argocd.argoproj.io/hook: PreSync
+     argocd.argoproj.io/sync-wave: 1
+spec:
+  template:
+    spec:
+       containers:
+         - name: pre
+           image: alpine
+           command: ["sleep", "10"]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  generateName: deploy-backend-
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: alpine
+        command: ["sleep", "10"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-backend-
+spec:
+  selector:
+    app: myapp
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: maintPage-up-
+  annotations:
+     argocd.argoproj.io/hook: Sync
+     argocd.argoproj.io/sync-wave: 1
+     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  template:
+    spec:
+      containers:
+      - name: maintPage-up
+        image: alpine
+        command: ["sleep",  "10"]
+      restartPolicy: Never
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  generateName: deploy-frontend-
+  annotations:
+    argocd.argoproj.io/sync-wave: 2
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: alpine
+        command: ["sleep", "10"]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-frontend-
+  annotations:
+    argocd.argoproj.io/sync-wave: 2
+spec:
+  selector:
+    app: myapp
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: maintPage-down-
+  annotations:
+     argocd.argoproj.io/hook: Sync
+     argocd.argoproj.io/sync-wave: 3
+     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  template:
+    spec:
+      containers:
+      - name: maintPage-down
+        image: alpine
+        command: ["sleep",  "10"]
+      restartPolicy: Never
+
+
+
+ 
