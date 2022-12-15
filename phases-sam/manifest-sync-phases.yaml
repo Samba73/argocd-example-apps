@@ -18,7 +18,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: main
+  generateName: main-
   annotations:
     argocd.argoproj.io/hook: Sync
 spec:
@@ -34,7 +34,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: pre-run-post-run-
+  generateName: post-run-
   annotations:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: HookFailed

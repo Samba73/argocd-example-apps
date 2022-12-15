@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: guestbook-p
   source:
-    path: phases
+    path: phases-sam
     repoURL: https://github.com/Samba73/argocd-example-apps.git
     targetRevision: master
   syncPolicy:
