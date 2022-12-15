@@ -11,8 +11,7 @@ spec:
        containers:
          - name: pre
            image: alpine
-           command: ["sleep", "10"]
-        restartPolicy: Never   
+           command: ["sleep", "10"] 
 ---
 apiVersion: batch/v1
 kind: Job
